@@ -50,4 +50,10 @@ export function setCurrency(currency) {
     }
 }
 
+export function setToggle(toggleTable) {
+    return function(dispatch) {
+        dispatch({type: "SET_TOGGLE", toggleTable: toggleTable})
+    }
+}
+
 

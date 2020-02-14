@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import getAllTables, { setFavouriteCurrency, setCurrency } from '../services/nbp.js';
+import getAllTables, { setFavouriteCurrency, setCurrency, setToggle } from '../services/nbp.js';
 
 export class CurrencyList extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
+        this.state = {
+            toggleTable: '',
+        };
     }
 
     handleChange(event) {
@@ -33,15 +36,28 @@ export class CurrencyList extends Component {
     }
 
     selectTables = table => {
+
+        let classTableName = 'lista '
+
+        if(this.props.toggleTable === ('active'+table.tableName))
+            classTableName+=this.props.toggleTable
+
         return (
             <div class="table">
-                 <button >Pokaż tabele {table.tableName}</button>
-                {/*{<button onClick={ /*() => this.addFavouriteCurrency(currency.code) *!/>Pokaż tabele {tables.tableName}</button>}*/}
-                <div className="lista" >
+                <button onClick={ () => this.toggleTable(table.tableName) }>Pokaż tabele {table.tableName}</button>
+                <div className={classTableName} >
+                    <button onClick={ () => this.toggleTable() }>Zamknij</button>
                     {table.rates.map((currency)=>{ return this.renderTable(currency, table.tableName)})}
                 </div>
             </div>
         );
+    }
+    toggleTable = (table) => {
+        if(table) {
+            this.props.setToggle('active'+table)
+        } else {
+            this.props.setToggle('')
+        }
     }
 
     renderTable = (element, table) => {
@@ -98,11 +114,12 @@ function mapStateToProps(state) {
         currencyList: state.currencyList,
         currencyFavouriteList: state.currencyFavouriteList,
         currency: state.currency,
-        isLoading: state.isLoading
+        isLoading: state.isLoading,
+        toggleTable: state.toggleTable
     };
 }
 
 export default connect(
     mapStateToProps,
-    { getAllTables, setFavouriteCurrency, setCurrency }
+    { getAllTables, setFavouriteCurrency, setCurrency, setToggle }
 )(CurrencyList);

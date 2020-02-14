@@ -5,7 +5,8 @@ const initialState = {
     currencyList: [{rates:['A'], tableName: 'A'}, {rates:['B'], tableName: 'B'}, {rates:['C'], tableName: 'C'}],
     currencyFavouriteList: [],
     currency: {},
-    isLoading: false
+    isLoading: false,
+    toggleTable: ''
 };
 
 const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -22,6 +23,8 @@ function rootReducer(state = initialState, action) {
             return {...state, currency: action.currency };
         case 'SET_LOADING':
             return {...state, isLoading: action.isLoading };
+        case 'SET_TOGGLE':
+            return {...state, toggleTable: action.toggleTable };
         default:
             return state;
     }

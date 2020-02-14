@@ -6,9 +6,6 @@ export class CurrencyList extends Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
-        this.state = {
-            toggleTable: '',
-        };
     }
 
     handleChange(event) {
@@ -39,14 +36,14 @@ export class CurrencyList extends Component {
 
         let classTableName = 'lista '
 
-        if(this.props.toggleTable === ('active'+table.tableName))
+        if(this.props.toggleTable === ('is-active'+table.tableName))
             classTableName+=this.props.toggleTable
 
         return (
             <div class="table">
-                <button onClick={ () => this.toggleTable(table.tableName) }>Pokaż tabele {table.tableName}</button>
+                <button className="tableButton" onClick={ () => this.toggleTable(table.tableName) }>Pokaż tabele {table.tableName}</button>
                 <div className={classTableName} >
-                    <button onClick={ () => this.toggleTable() }>Zamknij</button>
+                    <button className="closeButton" onClick={ () => this.toggleTable() }>X</button>
                     {table.rates.map((currency)=>{ return this.renderTable(currency, table.tableName)})}
                 </div>
             </div>
@@ -54,7 +51,7 @@ export class CurrencyList extends Component {
     }
     toggleTable = (table) => {
         if(table) {
-            this.props.setToggle('active'+table)
+            this.props.setToggle('is-active'+table)
         } else {
             this.props.setToggle('')
         }
@@ -62,8 +59,11 @@ export class CurrencyList extends Component {
 
     renderTable = (element, table) => {
         return (
-            <div>
-                {element.currency}<button onClick={ () => this.setFavouriteCurrency(element.code, table) }>Dodaj</button>
+            <div className="currencyElement" onClick={ () => this.setFavouriteCurrency(element.code, table) }>
+                <p>{element.currency}</p>
+                <button className="favouriteList" >
+                    +
+                </button>
             </div>
 
         );
@@ -96,8 +96,10 @@ export class CurrencyList extends Component {
             <div className="c-container">
                 <div className={"pageloader " + (this.props.isLoading ? 'is-active' : '')}><span className="title">Loading...</span></div>
                 <div class="tables">
-                    Dodaj do ulubionych z tabeli A, B lub C:
-                    {this.props.currencyList.map(this.selectTables)}
+                    <h1 className="tablesHeader">Dodaj do ulubionych z tabeli A, B lub C:</h1>
+                    <div className="tablesContent">
+                        {this.props.currencyList.map(this.selectTables)}
+                    </div>
                 </div>
                 Lista ulubionych
                 <button onClick={ this.deleteAllFavouriteCurrencies }>Wyczyść ulubione</button>

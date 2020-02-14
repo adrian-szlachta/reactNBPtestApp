@@ -2,8 +2,62 @@
   position: absolute;
   background: #fff;
   top: 0;
-  left: -320px;
+  padding-top: 40px;
+  left: -325px;
   width: 320px;
-  transition-duration: 0.4s; }
-  .lista.activeA, .lista.activeB, .lista.activeC {
+  min-height: 100%;
+  transition-duration: 0.4s;
+  box-shadow: 0 5px 15px rgba(57, 98, 254, 0.22), 0 3px 6px rgba(117, 108, 254, 0.42); }
+  .lista .closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: 0;
+    font-size: 20px; }
+  .lista .favouriteList {
+    font-size: 20px;
+    background: none;
+    border: 0; }
+  .lista .currencyElement {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px; }
+    .lista .currencyElement:hover {
+      background: #f1f1f1; }
+    .lista .currencyElement:focus, .lista .currencyElement:active {
+      background: #7a7a7a; }
+  .lista.is-activeA, .lista.is-activeB, .lista.is-activeC {
     left: 0; }
+
+.tables .tablesContent {
+  display: flex;
+  justify-content: space-around; }
+  .tables .tablesContent .table {
+    width: 100%;
+    text-align: center;
+    padding: 20px; }
+    .tables .tablesContent .table:first-child .tableButton {
+      background: #fc4a1a;
+      background: -webkit-linear-gradient(45deg, #fc4a1a, #f7b733) !important;
+      background: linear-gradient(45deg, #fc4a1a, #f7b733) !important; }
+    .tables .tablesContent .table:nth-child(2) .tableButton {
+      background: #6a11cb;
+      background: -webkit-linear-gradient(45deg, #6a11cb, #2575fc) !important;
+      background: linear-gradient(45deg, #6a11cb, #2575fc) !important; }
+    .tables .tablesContent .table:nth-child(3) .tableButton {
+      background: #00b09b;
+      background: -webkit-linear-gradient(45deg, #00b09b, #96c93d) !important;
+      background: linear-gradient(45deg, #00b09b, #96c93d) !important; }
+    .tables .tablesContent .table .tableButton {
+      width: 100%;
+      border: 0;
+      border-radius: 5px;
+      background: 0;
+      height: 50px;
+      box-shadow: 0 5px 15px rgba(57, 98, 254, 0.02), 0 3px 6px rgba(117, 108, 254, 0.12); }
+
+.pageloader {
+  display: none; }
+  .pageloader .is-active {
+    display: block; }
